@@ -4,13 +4,12 @@ include 'config.php';
 
 
 //vai ter foto, depois eu colocar
-function rUser($username, $pass){
+function rUser($username, $pass, $photo){
 // colocar pra registrar email, numero, genero +
 
 global $conn;
 
 $hashePass = password_hash($pass, PASSWORD_DEFAULT);
-//aqui ta proucurando??? NÇAI LEMBRO :(
 $query = "SELECT * FROM user WHERE nome = '$username'";
 
 //cadastras essa
@@ -23,13 +22,45 @@ if(mysqli_num_rows($cUser) > 0){
 //$cEmail = mysqli_query($conn,"");
 
 
-};
+$upload = 'upload/';
+$nPhoto = $_FILES['photo']['name'];
+$t_name_photo = $_FILES['photo']['tmp_name'];
+$pSize = $_FILES['photo']['size'];
+$photo_error = $_FILES['photo']['error'];
+
+
+//colocar echo com html pra puxar dps no css
+if($photo_error === 0){
+    if($pSize <= 2 * 1024 * 1024){
+        $new_name = uniqid('', true) . "." . pathinfo($nPhoto, PATHINFO_EXTENSION);
+        $photopath = $upload . $new_name;
+
+        if(move_uploaded_file($t_name_photo, $photopath)){
+            $query = "INSERT INTO user (nome, senha, imagem) VALUES ('$username','$pass','$photopath') ";
+            if(mysqli_query($conn, $query)){
+                // mandar pra login dpois
+                header('');
+                exit();
+            }else{
+                echo "Erro ao fazer upload.";
+            }
+    }
+    }else{
+    echo 'ERRO! A imagem deve ter no máximo 2 MB.';
+}
+}else{
+    echo '';
+    }
+
+
+}
+
 
 if(isset($_POST['register'])){
     $username = $_POST['username'];
     $pass = $_POST['pass'];
     //vai ter foto, depois eu colocar
-    rUser($username, $pass);
+    rUser($username, $pass, $_FILES['photo']);
     header('login.php');
 
     //mudar pra hashepass dps
@@ -59,7 +90,9 @@ if(isset($_POST['register'])){
             <form action="register.php" method="post">
                 <h2> cria a conta ai porra</h2>
                 <input type="text" name="username" placeholder="nome" required><br>
+                <!--mudar type pra password-->
                 <input type="text" name="pass" placeholder="senha"><br>
+                <input type="file" name="photo" accept="image/*">
 
                 <!--isso é um teste-->
                 <input type="checkbox"  >
