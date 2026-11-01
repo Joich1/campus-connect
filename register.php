@@ -36,38 +36,34 @@ if($photo_error === 0){
         $photopath = $upload . $new_name;
 
         if(move_uploaded_file($t_name_photo, $photopath)){
+            //mudar pra hashepass dps
             $query = "INSERT INTO user (nome, senha, imagem) VALUES ('$username','$pass','$photopath') ";
             if(mysqli_query($conn, $query)){
                 // mandar pra login dpois
                 header('');
                 exit();
+                }else{
+                    echo "Tente novamente mais tarde.";
+                    return false;
+                }
             }else{
                 echo "Erro ao fazer upload.";
             }
-    }
+        }else{
+            echo "ERRO! A imagem deve ter no máximo 2 MB.";
+        }
     }else{
-    echo 'ERRO! A imagem deve ter no máximo 2 MB.';
-}
-}else{
-    echo '';
+        echo "";
     }
-
-
 }
 
 
 if(isset($_POST['register'])){
     $username = $_POST['username'];
     $pass = $_POST['pass'];
-    //vai ter foto, depois eu colocar
     rUser($username, $pass, $_FILES['photo']);
     header('login.php');
-
-    //mudar pra hashepass dps
-
 };
-
-
 ?>
 
 
