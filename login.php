@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         </nav>
     </header>
-<!--colocar o return pra mostrar ai porra-->
+<!--colocar o return pra mostrar ai-->
     <main>
         <div>
             <form action="login.php" method="post">
