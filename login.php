@@ -41,6 +41,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Una - Login</title>
     <link rel="shortcut icon" href="./icon/quora.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
     <header>
@@ -52,11 +53,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <main>
         <div>
             <form action="login.php" method="post">
+                <button class="btn" onclick="history.back()">Voltar</button>
                 <h2>loga ai</h2>
                 email
                 <input type="text" name="email">
+                <?php if ($mensagem === "Email errado, ou não encontrado") : ?>
+                    <div style="margin-top: 5px;"><?= $mensagem; ?></div>
+                    <?php endif; ?>
                 senha
                 <input type="text" name="password">
+                <?php if ($mensagem === "Senha incorreta") : ?>
+                    <div style="margin-top: 5px; color: red;"><?= $mensagem; ?></div>
+                    <?php endif; ?>
+                
                 <button type="submit" name="logar">Logar</button><br>
 
                 não possui uma conta? cadastre aqui
