@@ -2,29 +2,26 @@
 session_start();
 include 'config.php';
 
-
-//vai ter foto, depois eu colocar
-function rUser($username, $pass, $photo){
-// colocar pra registrar email, numero, genero +
-
+function rUser($username, $pass, $email, $photo){
 global $conn;
 
 $hashePass = password_hash($pass, PASSWORD_DEFAULT);
 $query = "SELECT * FROM user WHERE nome = '$username'";
 
-//cadastras essa
 $cUser = mysqli_query($conn, "SELECT * FROM user WHERE nome = '$username' ");
 if(mysqli_num_rows($cUser) > 0){
     // teste no h1, mudara depois
-    return "<h1 id=''> já tem gente com ese nome"."</h1>";
+    echo "<h1 id=''> usuario já existe"."</h1>";
 };
-//cadastrar email depois
-//$cEmail = mysqli_query($conn,"");
 
+$cEmail = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' ");
+if(mysqli_num_rows($cEmail) > 0){
+    echo "já existe esse email";
+};
 
-$upload = 'upload/';
+$upload = 'uploads/';
 $nPhoto = $_FILES['photo']['name'];
-$t_name_photo = $_FILES['photo']['tmp_name'];
+$tmpnamephoto = $_FILES['photo']['tmp_name'];
 $pSize = $_FILES['photo']['size'];
 $photo_error = $_FILES['photo']['error'];
 
@@ -35,12 +32,12 @@ if($photo_error === 0){
         $new_name = uniqid('', true) . "." . pathinfo($nPhoto, PATHINFO_EXTENSION);
         $photopath = $upload . $new_name;
 
-        if(move_uploaded_file($t_name_photo, $photopath)){
+        if(move_uploaded_file($tmpnamephoto, $photopath)){
             //mudar pra hashepass dps
-            $query = "INSERT INTO user (nome, senha, imagem) VALUES ('$username','$pass','$photopath') ";
+            $query = "INSERT INTO user (nome, senha, email, imagem) VALUES ('$username','$pass','$email','$photopath') ";
             if(mysqli_query($conn, $query)){
                 // mandar pra login dpois
-                header('');
+                header('location:login.php');
                 exit();
                 }else{
                     echo "Tente novamente mais tarde.";
@@ -61,7 +58,8 @@ if($photo_error === 0){
 if(isset($_POST['register'])){
     $username = $_POST['username'];
     $pass = $_POST['pass'];
-    rUser($username, $pass, $_FILES['photo']);
+    $email = $_POST['email'];
+    rUser($username, $pass, $email, $_FILES['photo']);
     header('login.php');
 };
 ?>
@@ -73,6 +71,10 @@ if(isset($_POST['register'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>anu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <header>
@@ -82,13 +84,16 @@ if(isset($_POST['register'])){
     
     <main>
         <div>
-            <!--LEMBRESSE QUE O "enctype" É PRA INCRIPTAR, RECOLOCR ISSO DEPOIS "multipart/form-data"-->
-            <form action="register.php" method="post">
+            <form action="register.php" method="post" enctype="multipart/form-data">
                 <h2> cria a conta ai porra</h2>
                 <input type="text" name="username" placeholder="nome" required><br>
                 <!--mudar type pra password-->
                 <input type="text" name="pass" placeholder="senha"><br>
+                <!--mudar o type pra email dps-->
+                <input type="text" name="email" placeholder="123@gmail.com"><br>
+
                 <input type="file" name="photo" accept="image/*">
+                    <img clas="" src="#" alt="previa da foto">
 
                 <!--isso é um teste-->
                 <input type="checkbox"  >
@@ -102,5 +107,9 @@ if(isset($_POST['register'])){
     <footer>
         <p>&todos os direitos reservados *teste* </p>
     </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="main.js"></script>
 </body>
 </html>
