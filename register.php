@@ -92,8 +92,10 @@ if(isset($_POST['register'])){
                 <!--mudar o type pra email dps-->
                 <input type="text" name="email" placeholder="123@gmail.com"><br>
 
-                <input type="file" name="photo" accept="image/*">
-                    <img clas="" src="#" alt="previa da foto">
+                <input type="file" name="photo" accept="image/*" id="file-input">
+                <div id="preview">
+                    <img clas="" src="#" alt="previa da foto" id="file-preview">
+                </div>
 
                 <!--isso é um teste-->
                 <input type="checkbox"  >
