@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'config.php';
+$mensagem = ''; //colocar return nos lugares do echoo
 
 function rUser($username, $pass, $email, $photo){
 global $conn;
@@ -34,9 +35,8 @@ if($photo_error === 0){
 
         if(move_uploaded_file($tmpnamephoto, $photopath)){
             //mudar pra hashepass dps
-            $query = "INSERT INTO user (nome, senha, email, imagem) VALUES ('$username','$pass','$email','$photopath') ";
+            $query = "INSERT INTO user (nome, email, senha, imagem) VALUES ('$username','$email', '$pass','$photopath') ";
             if(mysqli_query($conn, $query)){
-                // mandar pra login dpois
                 header('location:login.php');
                 exit();
                 }else{
@@ -101,6 +101,7 @@ if(isset($_POST['register'])){
                 <input type="checkbox"  >
                 <label>Concordo com os termos e condições <a href="test.html">Saiba Mais!</a> </label>
                 <button type="submit" name="register">desgraça</button>
+                <a href="login.php">login</a>
             </form>
         </div>
     </main>
