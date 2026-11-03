@@ -11,7 +11,7 @@ $query = "SELECT * FROM user WHERE nome = '$username'";
 
 $cUser = mysqli_query($conn, "SELECT * FROM user WHERE nome = '$username' ");
 if(mysqli_num_rows($cUser) > 0){
-    // teste no h1, mudara depois
+    // teste no h1, mudara depois (mudar pra return)
     echo "<h1 id=''> usuario já existe"."</h1>";
 };
 
