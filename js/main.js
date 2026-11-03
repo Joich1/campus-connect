@@ -1,3 +1,13 @@
+const foto = document.getElementById('fperfil');
+const input2 = document.getElementById('photo');
+
+foto.addEventListener('click', () => {
+    input2.click();
+})
+
+
+
+/// isso aqui é pra preview la no register 
 const input = document.getElementById('fInput')
 const previewPhoto = () => {
     const file = input.files;

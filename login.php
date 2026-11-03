@@ -15,7 +15,7 @@ function lUser($email, $pass) {
         if ($pass === $email["senha"]) {
             $_SESSION['user_id'] = $email['id'];
             // depois mandar pro index
-            header('location: index.html');
+            header('location: index.php');
             exit();
         }else{
             return 'Senha incorreta';

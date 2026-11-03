@@ -9,10 +9,28 @@ if(!isset($_SESSION['user_id'])){
 	echo "você precisa estár logado pra fazer isso";
 	header("Refresh:3; uril=location: login.php");
 	exit;
+}if($_SERVER['REQUEST_METHOD'] === 'POST'){
+	if(isset($_POST['email']) && !empty($_POST['email'])){
+		$nEmail = $_POST['email'];
+		if(!filter_var($nEmail, FILTER_VALIDATE_EMAIL)){
+			echo "Insira um e-mail vállido.";
+		}else{
+			$sqlEmail = "UPDATE user SET email = '$nEmail' WHERE id = $user_id";
+			if(mysqli_query($conn, $sqlEmail)){
+				echo "Seu E-mail foi alterado com sucesso.";
+			}else{
+				echo "Erro ao alterar o E-mail";
+			}
+		}
+	}
+
+	if(isset($_POST['senha']) && !empty($_POST['senha'])){
+		$nPass = $_POST['senha'];
+	}
 }
 
 
-$sqlUser = "SELECT nome, email, imagem, data_criacao FROM locador WHERE id = $user_id";
+$sqlUser = "SELECT nome, email, imagem, data_criacao FROM user WHERE id = $user_id";
 $result = mysqli_query($conn, $sqlUser);
 $user = mysqli_fetch_assoc($result);
 ?>
@@ -35,6 +53,10 @@ $user = mysqli_fetch_assoc($result);
 	<main>
 		<div>
 			<form action="userdetails.php" method="post" enctype="multipart/form-data">
+				
+				<img id="fperfil" src="foto.jpg" width="100" height="100" alt="preview nova foto">
+				<input type="file" id="photo" name="photo" accept="image/*">
+
 				<label>alterar nome</label>
 				<input type="text" name="name">
 
@@ -49,5 +71,6 @@ $user = mysqli_fetch_assoc($result);
 		</div>
 	</main>
 	
+	<script src="./js/main.js"></script>
 </body>
 </html>

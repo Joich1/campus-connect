@@ -85,7 +85,7 @@ if(isset($_POST['register'])){
     <main>
         <div>
             <form action="register.php" method="post" enctype="multipart/form-data">
-                <h2> cria a conta ai porra</h2>
+                <h2> cria a conta ai</h2>
                 <input type="text" name="username" placeholder="nome" required><br>
                 <!--mudar type pra password-->
                 <input type="text" name="pass" placeholder="senha"><br>
