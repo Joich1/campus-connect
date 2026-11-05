@@ -94,13 +94,13 @@ if(isset($_POST['register'])){
 
                 <input type="file" name="photo" accept="image/*" id="fInput">
                 <div id="preview">
-                    <img clas="" src="#" alt="previa da foto" id="fPreview">
+                    <img src="#" alt="previa da foto" id="fPreview" width="100" height="100">
                 </div>
-
+                
                 <!--isso é um teste-->
                 <input type="checkbox"  >
                 <label>Concordo com os termos e condições <a href="test.html">Saiba Mais!</a> </label>
-                <button type="submit" name="register">desgraça</button>
+                <button type="submit" name="register">Registrar</button>
                 <a href="login.php">login</a>
             </form>
         </div>
@@ -110,9 +110,7 @@ if(isset($_POST['register'])){
     <footer>
         <p>&todos os direitos reservados *teste* </p>
     </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="./js/main.js"></script>
+    
+    <script src="main.js"></script>
 </body>
 </html>
