@@ -3,7 +3,17 @@ const etapa2 = document.getElementById('etapa2')
 const btnProximo = document.getElementById('btnProximo')
 const btnVoltar = document.getElementById('btnVoltar')
 
+if(btnProximo && btnVoltar){
+    btnProximo.addEventListener('click', () =>{
+        etapa1.hidden = true;
+        etapa2.hidden = false;
+    })
 
+    btnVoltar.addEventListener('click', (){
+        etapa1.hidden = true;
+        etapa1.hidden = false
+    })
+}
 
 
 const input = document.getElementById('fInput')
