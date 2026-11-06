@@ -1,3 +1,5 @@
+
+
 const input = document.getElementById('fInput')
 
 const previewPhoto = () => {

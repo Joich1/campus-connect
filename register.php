@@ -74,7 +74,8 @@ if(isset($_POST['register'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="./css/main.css">
+<!--puxar css depois aqui!-->
+    <link rel="stylesheet" href="logn.css">
 </head>
 <body>
     <header>
@@ -86,22 +87,42 @@ if(isset($_POST['register'])){
         <div>
             <form action="register.php" method="post" enctype="multipart/form-data">
                 <h2> cria a conta ai</h2>
-                <input type="text" name="username" placeholder="nome" required><br>
-                <!--mudar type pra password-->
-                <input type="text" name="pass" placeholder="senha"><br>
-                <!--mudar o type pra email dps-->
-                <input type="text" name="email" placeholder="123@gmail.com"><br>
+                <div id="etapa1">
+                    <div class="input-container">
+                        <input type="text" name="username" id="input" required="">
+                        <label for="input" class="label">Usuário :D</label>
+                        <div class="underline"></div>
+                    </div>
 
-                <input type="file" name="photo" accept="image/*" id="fInput">
-                <div id="preview">
-                    <img src="#" alt="previa da foto" id="fPreview" width="100" height="100">
+                    <div class="input-container">
+                        <!--mudar type pra password-->
+                        <!-- colocar required=""-->
+                        <input type="text" name="pass" id="input">
+                        <label for="input" class="label">Senha</label>
+                        <div class="underline"></div>
+                        </div>
+
+                        <!--mudar o type pra email dps--> <!--copiar os de cima aqui depois--->
+                        <input type="text" name="email" placeholder="123@gmail.com">
+
+
+                        <!--isso é um teste-->
+                        <input type="checkbox"  >
+                        <label>Concordo com os termos e condições <a href="test.html">Saiba Mais!</a> </label>
+
+                        <button type="button" id="btnProximo">Próximo</button>
+                        <a href="login.php">login</a>
                 </div>
-                
-                <!--isso é um teste-->
-                <input type="checkbox"  >
-                <label>Concordo com os termos e condições <a href="test.html">Saiba Mais!</a> </label>
-                <button type="submit" name="register">Registrar</button>
-                <a href="login.php">login</a>
+
+                <div id="etapa2" hidden>
+                        <input type="file" name="photo" accept="image/*" id="fInput">
+                        <div id="preview">
+                            <img src="#" alt="previa da foto" id="fPreview" width="100" height="100">
+                        </div>
+
+                        <button type="button" id="btnVoltar">Voltar</button>
+                        <button type="submit" name="register">Registrar</button>
+                </div> 
             </form>
         </div>
     </main>
