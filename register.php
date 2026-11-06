@@ -103,15 +103,16 @@ if(isset($_POST['register'])){
                         </div>
 
                         <!--mudar o type pra email dps--> <!--copiar os de cima aqui depois--->
-                        <input type="text" name="email" placeholder="123@gmail.com">
+                        <input type="text" name="email" placeholder="123@gmail.com"><br>
 
 
                         <!--isso é um teste-->
                         <input type="checkbox"  >
-                        <label>Concordo com os termos e condições <a href="test.html">Saiba Mais!</a> </label>
+                        <label>Concordo com os termos e condições <a href="test.html">Saiba Mais!</a> </label><br>
 
                         <button type="button" id="btnProximo">Próximo</button>
-                        <a href="login.php">login</a>
+                        <label>Já tem conta?</label><a href="login.php">Logar</a>
+                        
                 </div>
 
                 <div id="etapa2" hidden>
