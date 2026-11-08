@@ -12,7 +12,7 @@ $query = "SELECT * FROM user WHERE nome = '$username'";
 $cUser = mysqli_query($conn, "SELECT * FROM user WHERE nome = '$username' ");
 if(mysqli_num_rows($cUser) > 0){
     // teste no h1, mudara depois (mudar pra return)
-    echo "<h1 id=''> usuario já existe"."</h1>";
+    return "<h1 id='existente'> Esse Usuário não está disponivél"."</h1>";
 };
 
 $cEmail = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' ");
@@ -66,7 +66,8 @@ if(isset($_POST['register'])){
 
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<!--colocar databs nas outras paginas-->
+<html lang="pt-BR" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -7,7 +7,7 @@ $user_id = $_SESSION['user_id'];
 //mudar pra return depois
 if(!isset($_SESSION['user_id'])){
 	echo "você precisa estár logado pra fazer isso";
-	header("Refresh:3; uril=location: login.php");
+	header("location: login.php");
 	exit;
 }if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	if(isset($_POST['email']) && !empty($_POST['email'])){

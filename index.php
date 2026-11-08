@@ -11,6 +11,7 @@ if(isset($_SESSION['user_id'])){
     $pfp = $user['imagem'];
 
 }else{
+    //mudar depois, isso é a foto padrão
     $pfp = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFWeVHKfPKt_07dWbdfP_WhEy6rs1v_ttPlpPXstag0A&s=10';
 }
 ?>
