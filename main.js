@@ -9,12 +9,14 @@ if(btnProximo && btnVoltar){
         etapa1.hidden = true;
         etapa2.hidden = false;
         titulo.textContent = 'Como você se aparece?';
+        console.log("testeporra");
     })
 
     btnVoltar.addEventListener('click', () =>{
         etapa1.hidden = true;
-        etapa1.hidden = false
+        etapa2.hidden = false
         titulo.textContent = 'cria a conta ai';
+        console.log("testeporra2");
     })
 }
 
