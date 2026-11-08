@@ -13,8 +13,8 @@ if(btnProximo && btnVoltar){
     })
 
     btnVoltar.addEventListener('click', () =>{
-        etapa1.hidden = true;
-        etapa2.hidden = false
+        etapa2.hidden = true;
+        etapa1.hidden = false;
         titulo.textContent = 'cria a conta ai';
         console.log("testeporra2");
     })
