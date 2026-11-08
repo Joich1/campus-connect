@@ -11,13 +11,13 @@ $query = "SELECT * FROM user WHERE nome = '$username'";
 
 $cUser = mysqli_query($conn, "SELECT * FROM user WHERE nome = '$username' ");
 if(mysqli_num_rows($cUser) > 0){
-    // teste no h1, mudara depois (mudar pra return)
+    // mudar id pra puxar css
     return "<h1 id='existente'> Esse Usuário não está disponivél"."</h1>";
 };
 
 $cEmail = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' ");
 if(mysqli_num_rows($cEmail) > 0){
-    echo "já existe esse email";
+    return "já existe esse email";
 };
 
 $upload = 'uploads/';
@@ -34,33 +34,32 @@ if($photo_error === 0){
         $photopath = $upload . $new_name;
 
         if(move_uploaded_file($tmpnamephoto, $photopath)){
-            //mudar pra hashepass dps
-            $query = "INSERT INTO user (nome, email, senha, imagem) VALUES ('$username','$email', '$pass','$photopath') ";
+            $query = "INSERT INTO user (nome, email, senha, imagem) VALUES ('$username','$email', '$hashePass','$photopath') ";
             if(mysqli_query($conn, $query)){
                 header('location:login.php');
                 exit();
                 }else{
-                    echo "Tente novamente mais tarde.";
+                    return "Tente novamente mais tarde.";
                     return false;
                 }
             }else{
-                echo "Erro ao fazer upload.";
+                return "Erro ao fazer upload.";
             }
         }else{
-            echo "ERRO! A imagem deve ter no máximo 2 MB.";
+            return "ERRO! A imagem deve ter no máximo 2 MB.";
         }
     }else{
-        echo "";
+        return "";
     }
 }
 
 
 if(isset($_POST['register'])){
     $username = $_POST['username'];
-    $pass = $_POST['pass'];
     $email = $_POST['email'];
+    $pass = $_POST['pass'];
     rUser($username, $pass, $email, $_FILES['photo']);
-    header('login.php');
+    header('location: login.php');
 };
 ?>
 
@@ -76,7 +75,7 @@ if(isset($_POST['register'])){
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <!--puxar css depois aqui!-->
-    <link rel="stylesheet" href="logn.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <header>
@@ -91,30 +90,27 @@ if(isset($_POST['register'])){
                 <div id="etapa1">
                     <div class="input-container">
                         <input type="text" name="username" id="input" required="">
-                        <label for="input" class="label">Usuário :D</label>
+                        <label for="input" class="label">Usuário</label>
                         <div class="underline"></div>
                     </div>
 
                     <div class="input-container">
-                        <!--mudar type pra password-->
-                        <!-- colocar required=""-->
-                        <input type="text" name="pass" id="input">
+                        <input type="password" name="pass" id="input" required="">
                         <label for="input" class="label">Senha</label>
                         <div class="underline"></div>
-                        </div>
+                    </div>
 
-                        <!--mudar o type pra email dps--> <!--copiar os de cima aqui depois--->
-                        <input type="text" name="email" placeholder="123@gmail.com"><br>
+                    <div class="input-container">
+                        <input type="email" name="email" id="input" required="">
+                        <label for="input" class="label">Email</label>
+                        <div class="underline"></div>
+                    </div>
 
+                    <input type="checkbox"  >
+                    <label>Concordo com os termos e condições <a href="test.html">Saiba Mais!</a> </label><br>
 
-                        <!--isso é um teste-->
-                        <input type="checkbox"  >
-                        <label>Concordo com os termos e condições <a href="test.html">Saiba Mais!</a> </label><br>
-
-                        <button type="button" id="btnProximo">Próximo</button>
+                    <button type="button" id="btnProximo">Próximo</button>
                         <label>Já tem conta?</label><a href="login.php">Logar</a>
-                        
-                </div>
 
                 <div id="etapa2" hidden>
                         <input type="file" name="photo" accept="image/*" id="fInput">
