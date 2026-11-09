@@ -11,8 +11,7 @@ function lUser($email, $pass) {
 
     if (mysqli_num_rows($result) > 0) {
         $email = mysqli_fetch_assoc($result);
-        //if (password_verify($pass, $email["senha"])) {
-        if ($pass === $email["senha"]) {
+        if (password_verify($pass, $email["senha"])) {
             $_SESSION['user_id'] = $email['id'];
             // depois mandar pro index
             header('location: index.php');

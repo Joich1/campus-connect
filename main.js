@@ -3,20 +3,27 @@ const etapa2 = document.getElementById('etapa2')
 const btnProximo = document.getElementById('btnProximo')
 const btnVoltar = document.getElementById('btnVoltar')
 const titulo = document.getElementById('titulo')
+const stepTag = document.querySelector('.step-tag')
 
 if(btnProximo && btnVoltar){
     btnProximo.addEventListener('click', () =>{
+        for(const field of etapa1.querySelectorAll('input')){
+            if(!field.reportValidity()){
+                return;
+            }
+        }
+
         etapa1.hidden = true;
         etapa2.hidden = false;
-        titulo.textContent = 'Como você se aparece?';
-        console.log("teste12");
+        titulo.textContent = 'Adicione sua foto';
+        stepTag.textContent = 'PASSO 2 DE 2';
     })
 
     btnVoltar.addEventListener('click', () =>{
         etapa2.hidden = true;
         etapa1.hidden = false;
-        titulo.textContent = 'cria a conta ai';
-        console.log("teste22");
+        titulo.textContent = 'Crie sua conta';
+        stepTag.textContent = 'PASSO 1 DE 2';
     })
 }
 

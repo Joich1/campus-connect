@@ -4,7 +4,7 @@ include 'config.php';
 $mensagem = '';
 $user_id = $_SESSION['user_id'];
 
-//mudar pra return depois
+//mudar pra return depois (passar por htmlt dpois)
 if(!isset($_SESSION['user_id'])){
 	echo "você precisa estár logado pra fazer isso";
 	header("location: login.php");
@@ -26,6 +26,18 @@ if(!isset($_SESSION['user_id'])){
 
 	if(isset($_POST['senha']) && !empty($_POST['senha'])){
 		$nPass = $_POST['senha'];
+		if(strlen($nPass) < 6){
+			return "Sua senha tem que ter no mínumo 6 caracteres";
+		}else{
+			$passHash = password_hash($nPass, PASSWORD_DEFAULT);
+
+			$sqlPass = "UPDATE user SET senha = '$passHash' WHERE id = $user_id";
+			if(mysqli_query($conn, $sqlPass)){
+				return "Sua senha foi alterada com sucesso";
+			}else{
+				return "Erro ao alterar a senha.";
+			}
+		}
 	}
 }
 
@@ -55,7 +67,7 @@ $user = mysqli_fetch_assoc($result);
 			<form action="userdetails.php" method="post" enctype="multipart/form-data">
 				
 				<img id="fperfil" src="foto.jpg" width="100" height="100" alt="preview nova foto">
-				<input type="file" id="photo" name="photo" accept="image/*">
+				<input type="file" id="photo" name="photo" accept="image/*"><br>
 
 				<label>alterar nome</label>
 				<input type="text" name="name">
